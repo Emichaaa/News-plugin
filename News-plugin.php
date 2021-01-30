@@ -19,9 +19,36 @@ if ( !class_exists( 'NewsPlugin' ) ) {
 
     class NewsPlugin
     {
+
+        public $plugin;
+        public $pluginSvgIcon;
+
+        function __construct() {
+            $this->plugin = plugin_basename( __FILE__ );
+            $this->pluginSvgIcon = base64_encode( file_get_contents(plugin_dir_path( __FILE__ ) . 'assets/images/egt-logo.svg' ) );
+        }
+
         function np_register() {
             add_action( 'admin_enqueue_scripts', array( $this, 'np_enqueue' ) );
             $this->np_create_post_type();
+
+            add_action( 'admin_menu', array( $this, 'np_add_admin_pages' ) );
+
+            add_filter( "plugin_action_links_$this->plugin", array( $this, 'np_settings_link' ) );
+        }
+
+        public function np_settings_link( $links ) {
+            $settings_link = '<a href="admin.php?page=news_plugin">Settings</a>';
+            array_push( $links, $settings_link );
+            return $links;
+        }
+
+        public function np_add_admin_pages() {
+            add_menu_page( 'News Plugin', 'News', 'manage_options', 'news_plugin', array( $this, 'np_admin_index' ), "data:image/svg+xml;base64, ".$this->pluginSvgIcon, 110 );
+        }
+
+        public function np_admin_index() {
+            require_once plugin_dir_path( __FILE__ ) . 'templates/admin.php';
         }
 
         protected function np_create_post_type() {
