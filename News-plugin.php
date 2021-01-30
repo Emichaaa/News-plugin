@@ -37,6 +37,21 @@ if ( !class_exists( 'NewsPlugin' ) ) {
             $this->pluginSvgIcon = base64_encode( file_get_contents(PLUGIN_PATH . 'assets/images/egt-logo.svg' ) );
             $this->np_create_post_type();
             $this->np_admin_menu();
+
+            add_shortcode( 'np-show-news', array( $this, 'np_show_news' ) );
+        }
+
+
+
+        public function np_show_news( $attributes )
+        {
+            extract( shortcode_atts( array(
+                'max_posts' => '10',
+            ), $attributes ) );
+
+            ob_start();
+            require_once PLUGIN_PATH."/templates/show-news-shortcode.php";
+            return ob_get_clean();
         }
 
         function np_register() {

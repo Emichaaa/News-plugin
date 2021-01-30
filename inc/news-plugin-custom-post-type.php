@@ -12,9 +12,10 @@ class NewsPluginCustomPostType
         register_post_type(
             'news',
             array(
+                'label'              => 'News',
                 'labels'             => 'News',
                 'public'             => true,
-                'menu_icon' => 'dashicons-admin-site-alt',
+                'menu_icon'          => 'dashicons-admin-site-alt',
                 'publicly_queryable' => true,
                 'show_ui'            => true,
                 'show_in_menu'       => true,
