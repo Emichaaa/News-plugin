@@ -35,40 +35,7 @@ if ( !class_exists( 'NewsPlugin' ) ) {
         function __construct() {
             $this->plugin = PLUGIN;
             $this->pluginSvgIcon = base64_encode( file_get_contents(PLUGIN_PATH . 'assets/images/egt-logo.svg' ) );
-            $this->np_create_post_type();
-            $this->np_admin_menu();
-
-            add_shortcode( 'np-show-news', array( $this, 'np_show_news' ) );
-        }
-
-
-
-        public function np_show_news( $attributes )
-        {
-            extract( shortcode_atts( array(
-                'max_posts' => '10',
-            ), $attributes ) );
-
-            ob_start();
-            require_once PLUGIN_PATH."/templates/show-news-shortcode.php";
-            return ob_get_clean();
-        }
-
-        function np_register() {
-            add_action( 'admin_enqueue_scripts', array( $this, 'np_enqueue' ) );
-            add_filter( "plugin_action_links_$this->plugin", array( $this, 'np_settings_link' ) );
-        }
-
-        public function np_settings_link( $links ) {
-            $settings_link = '<a href="admin.php?page='.SETTINGS_PAGE_SLUG.'">' . __( "Settings", NPTEXTDOMAIN ) . '</a>';
-            array_push( $links, $settings_link );
-            return $links;
-        }
-
-        function np_enqueue() {
-            // enqueue all our scripts
-            wp_enqueue_style( 'mypluginstyle', plugins_url( '/assets/news-plugin.css', __FILE__ ) );
-            wp_enqueue_script( 'mypluginscript', plugins_url( '/assets/news-script.js', __FILE__ ) );
+            $this->np_init();
         }
 
         function np_activate() {
@@ -81,21 +48,15 @@ if ( !class_exists( 'NewsPlugin' ) ) {
             NewsPluginDeactivate::np_deactivate();
         }
 
-        function np_admin_menu(){
-            require_once PLUGIN_PATH . 'inc/news-plugin-admin.php';
-            $newsPluginAdmin = new NewsPluginAdmin();
+        function np_init(){
+            require_once PLUGIN_PATH . 'inc/news-plugin-init.php';
+            $NewsPluginInit = new NewsPluginInit();
 
-        }
-
-        function np_create_post_type() {
-            require_once PLUGIN_PATH . 'inc/news-plugin-custom-post-type.php';
-            $newsPluginCustomPostType = new newsPluginCustomPostType();
         }
     }
 
     // Init class
     $alecadddPlugin = new NewsPlugin();
-    $alecadddPlugin->np_register();
 
     // activation
     register_activation_hook( __FILE__, array( $alecadddPlugin, 'np_activate' ) );
