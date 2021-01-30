@@ -41,7 +41,6 @@ if ( !class_exists( 'NewsPlugin' ) ) {
 
         function np_register() {
             add_action( 'admin_enqueue_scripts', array( $this, 'np_enqueue' ) );
-
             add_filter( "plugin_action_links_$this->plugin", array( $this, 'np_settings_link' ) );
         }
 
@@ -49,15 +48,6 @@ if ( !class_exists( 'NewsPlugin' ) ) {
             $settings_link = '<a href="admin.php?page='.SETTINGS_PAGE_SLUG.'">' . __( "Settings", NPTEXTDOMAIN ) . '</a>';
             array_push( $links, $settings_link );
             return $links;
-
-        }
-
-        protected function np_create_post_type() {
-            add_action( 'init', array( $this, 'np_custom_post_type' ) );
-        }
-
-        function np_custom_post_type() {
-            register_post_type( 'news', ['public' => true, 'label' => 'News', 'menu_icon' => 'dashicons-admin-site-alt'] );
         }
 
         function np_enqueue() {
@@ -80,6 +70,11 @@ if ( !class_exists( 'NewsPlugin' ) ) {
             require_once PLUGIN_PATH . 'inc/news-plugin-admin.php';
             $newsPluginAdmin = new NewsPluginAdmin();
 
+        }
+
+        function np_create_post_type() {
+            require_once PLUGIN_PATH . 'inc/news-plugin-custom-post-type.php';
+            $newsPluginCustomPostType = new newsPluginCustomPostType();
         }
     }
 
