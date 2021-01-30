@@ -15,6 +15,12 @@ License: A "Slug" license name e.g. GPL2
 
 defined( 'ABSPATH' ) or die( 'Good luck! :)' );
 
+// Define CONSTANTS
+define( 'PLUGIN_PATH', plugin_dir_path( __FILE__ ) );
+define( 'PLUGIN_URL', plugin_dir_url( __FILE__ ) );
+define( 'PLUGIN', plugin_basename( __FILE__ ) );
+
+
 if ( !class_exists( 'NewsPlugin' ) ) {
 
     class NewsPlugin
@@ -24,8 +30,8 @@ if ( !class_exists( 'NewsPlugin' ) ) {
         public $pluginSvgIcon;
 
         function __construct() {
-            $this->plugin = plugin_basename( __FILE__ );
-            $this->pluginSvgIcon = base64_encode( file_get_contents(plugin_dir_path( __FILE__ ) . 'assets/images/egt-logo.svg' ) );
+            $this->plugin = PLUGIN;
+            $this->pluginSvgIcon = base64_encode( file_get_contents(PLUGIN_PATH . 'assets/images/egt-logo.svg' ) );
         }
 
         function np_register() {
@@ -48,7 +54,7 @@ if ( !class_exists( 'NewsPlugin' ) ) {
         }
 
         public function np_admin_index() {
-            require_once plugin_dir_path( __FILE__ ) . 'templates/admin.php';
+            require_once PLUGIN_PATH . 'templates/admin.php';
         }
 
         protected function np_create_post_type() {
@@ -66,12 +72,12 @@ if ( !class_exists( 'NewsPlugin' ) ) {
         }
 
         function np_activate() {
-            require_once plugin_dir_path( __FILE__ ) . 'inc/news-plugin-activate.php';
+            require_once PLUGIN_PATH . 'inc/news-plugin-activate.php';
             NewsPluginActivate::np_activate();
         }
 
         function np_deactivate() {
-            require_once plugin_dir_path( __FILE__ ) . 'inc/news-plugin-deactivate.php';
+            require_once PLUGIN_PATH . 'inc/news-plugin-deactivate.php';
             NewsPluginDeactivate::np_deactivate();
         }
     }
