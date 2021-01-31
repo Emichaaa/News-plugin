@@ -87,9 +87,11 @@ if ( $mainQuery->have_posts() ) {
         ?>
 
                 <article class="single-article">
-                    <?php if($featured_img_url): ?>
+                    <?php if($featured_img_url){ ?>
                         <a href="<?php echo $newsUrl ?>"><img src="<?php echo $featured_img_url ?>" alt=""></a>
-                    <?php endif; ?>
+                    <?php } else { ?>
+                        <a href="<?php echo $newsUrl ?>"><img src="<?php echo PLUGIN_URL . 'assets/images/default-image.png' ?>" alt="default"></a>
+                    <?php } ?>
                     <p class="tag-post"><?php echo $cats; ?></p>
                     <h3 class="post-title"><a href="<?php echo $newsUrl ?>"><?php echo get_the_title(); ?></a></h3>
                     <span class="post-data"><?php $post_date ?></span>
@@ -122,9 +124,11 @@ if ( $mainQuery->have_posts() ) {
                     $featured_img_url = get_the_post_thumbnail_url(get_the_ID(),'full');
                     ?>
                             <article class="featured-article">
-                                <?php if($featured_img_url): ?>
-                                <img src="<?php echo $featured_img_url; ?>" alt="">
-                                <?php endif; ?>
+                                <?php if($featured_img_url){ ?>
+                                    <a href="<?php echo $newsUrl ?>"><img src="<?php echo $featured_img_url ?>" alt=""></a>
+                                <?php } else { ?>
+                                    <a href="<?php echo $newsUrl ?>"><img src="<?php echo PLUGIN_URL . 'assets/images/default-image.png' ?>" alt="default"></a>
+                                <?php } ?>
                                 <div class="featured-article-content">
                                     <div class="featured-left-content">
                                         <p class="tag-post"><?php echo $cats ?></p>
