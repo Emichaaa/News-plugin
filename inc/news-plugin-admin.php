@@ -63,29 +63,28 @@ class newsPluginAdmin
         ?>
         <div class="np_plugin_options_page_wrapper">
             <h3><?php _e( 'Plugin Description', NPTEXTDOMAIN );?></h3>
-            <p><?php _e( 'This is a simple <b>News plugin</b>. You can create News posts and use them with shortcode provided by the <b>News plugin</b>.', NPTEXTDOMAIN );?></p>
-            <p><?php _e( 'One of the additional options allows you to pick up Featured news in shortcode. Customizing plugin templates in active theme folder. ', NPTEXTDOMAIN );?></p>
+            <p><?php _e( 'This is a simple <b>'.PLUGIN_NAME.'</b>. You can create News posts and show them with shortcode provided by the <b>'.PLUGIN_NAME.'</b>.', NPTEXTDOMAIN );?></p>
+            <p><?php _e( 'One of the additional options allows you to choose Featured news in the shortcode.', NPTEXTDOMAIN );?></p>
 
             <h3><?php _e( 'Plugin Workflow', NPTEXTDOMAIN );?></h3>
-            <p><?php _e( 'When you activate the plugin, first thing is to create Custom Post Type - News, create page with selected custom layout and included shortcode in content.', NPTEXTDOMAIN );?></p>
-            <p><?php _e( 'After that plugin reflush rules and create plugin options page. At this version of the plugin, options page doesnt contain some specific field with options.', NPTEXTDOMAIN );?></p>
-            <p><?php _e( 'If you already activate the plugin, you are free to use the shortcode in it.', NPTEXTDOMAIN );?></p>
+            <p><?php _e( 'As soon as the plugin is activated a Custom Post Type called “News” is created.', NPTEXTDOMAIN );?></p>
+            <p><?php _e( 'Also inside pages you will see a new page “News plugin page” included the shortcode with all options.', NPTEXTDOMAIN );?></p>
 
             <h3><?php _e( 'Shortcode', NPTEXTDOMAIN );?></h3>
-            <p><?php _e( 'This basic plugin has only one shortcode allowing to show News section in all pages or posts.', NPTEXTDOMAIN );?></p>
+            <p><?php _e( 'This basic plugin has only one shortcode, which allows you to show all your news with pretty layout inside any page or post.', NPTEXTDOMAIN );?></p>
             <p><?php _e( '<b>[np-show-news max_posts="10" category="all" featured_news="newest"]</b>', NPTEXTDOMAIN );?></p>
-            <p><?php _e( 'The shortcode has 3 available attributes. You can use the plugin without this attributes', NPTEXTDOMAIN );?></p>
-            <p><?php _e( '- max_posts - default value = 10. This is the number of news within Featured post included.', NPTEXTDOMAIN );?></p>
+            <p><?php _e( 'The shortcode has 3 available attributes. You are able to use the plugin without this attributes.', NPTEXTDOMAIN );?></p>
+            <p><?php _e( '- max_posts - default value = 10. The max number of the posts which will be shown.', NPTEXTDOMAIN );?></p>
             <p><?php _e( '- category - default value = "all". This attribute allows you to choose only one category to show. Leave empty to use all available categories.', NPTEXTDOMAIN );?></p>
-            <p><?php _e( '- featured_news - default value = "newest". Featured_news attribute select one news and use show it bigger than other ones. If you leave it empty, or use "newest", the shortcode will show the newest published post with Checked custom field "Featured News?". If you insert PostID instead "newest", the inserted post will show at the front end.', NPTEXTDOMAIN );?></p>
+            <p><?php _e( '- featured_news - default value = "newest". The Featured_news attribute selects one news, showing it bigger than the other ones. If you leave it empty, or use "newest", the shortcode will show the newest published post. If you use “featured” instead “newest” the shortcode will show that post, whose option “Featured News” is checked (you are able to see that option inside every single post).  If you have more that one post with “Featured News” option selected, the shortcode will show the newest one. If you insert/use PostID instead "newest" or ”featured”, the shortcode will show the post with the corresponding ID.', NPTEXTDOMAIN );?></p>
             <p><?php _e( 'All attributes are optional.', NPTEXTDOMAIN );?></p>
 
             <h3><?php _e( 'Plugin page', NPTEXTDOMAIN );?></h3>
-            <p><?php _e( '<b>News plugin</b> create page "News plugin page" when it\'s activated. This page use clear plugin template and already loaded shortcode.', NPTEXTDOMAIN );?></p>
-            <p><?php _e( 'You can access this page <a href="/news-plugin-page" target="_blank">here</a>.', NPTEXTDOMAIN );?></p>
+            <p><?php _e( 'The <b>'.PLUGIN_NAME.'</b> creates a page "News plugin page" after its activation. This page uses a clear plugin template with the shortcode already loaded.', NPTEXTDOMAIN );?></p>
+            <p><?php _e( 'You can access the page <a href="/news-plugin-page" target="_blank">here</a>.', NPTEXTDOMAIN );?></p>
 
             <h3><?php _e( 'Uninstall plugin', NPTEXTDOMAIN );?></h3>
-            <p><?php _e( 'When you uninstall <b>News plugin</b> all posts in Custom post type News will be erase permanently. The plugin page will be erase too.', NPTEXTDOMAIN );?></p>
+            <p><?php _e( 'When you uninstall the <b>'.PLUGIN_NAME.'</b> all posts inside the Custom post type News will be deleted permanently. The plugin page will be deleted too.', NPTEXTDOMAIN );?></p>
 
             <p><?php _e( 'Enjoy!', NPTEXTDOMAIN );?></p>
         </div>

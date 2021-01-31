@@ -22,6 +22,7 @@ define( 'PLUGIN_URL', plugin_dir_url( __FILE__ ) );
 define( 'PLUGIN', plugin_basename( __FILE__ ) );
 define( 'NPTEXTDOMAIN', 'egt-news-plugin' );
 define( 'SETTINGS_PAGE_SLUG', 'news_plugin' );
+define( 'PLUGIN_NAME', 'News Plugin' );
 
 if ( !class_exists( 'NewsPlugin' ) ) {
 
