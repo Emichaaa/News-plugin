@@ -10,16 +10,15 @@
 $main_args_query = array(
     'post_type' => array('news'),
     'post_status' => array('publish'),
-    'posts_per_page' => -1,
     'order' => 'DESC',
 );
 
-$maxPosts       = $allAttributes['max_posts'];
-$category       = $allAttributes['category'];
-$featured_news  = $allAttributes['featured_news'];
+$maxPosts       = ( !empty($allAttributes['max_posts']) ? $allAttributes['max_posts'] : "10" );
+$category       = ( !empty($allAttributes['category']) ? $allAttributes['category'] : "all" );
+$featured_news  = ( !empty($allAttributes['featured_news']) ? $allAttributes['featured_news'] : "newest" );;
 
 if($maxPosts){
-    $args_query['posts_per_page'] = $maxPosts;
+    $main_args_query['posts_per_page'] = $maxPosts - 1;
 }
 
 $sectionTitle = __( "EGT Digital News", NPTEXTDOMAIN);
@@ -146,7 +145,7 @@ if ( $mainQuery->have_posts() ) {
                                 <div class="featured-article-content">
                                     <div class="featured-left-content">
                                         <p class="tag-post"><?php echo $cats ?></p>
-                                        <h3><?php echo get_the_title(); ?></h3>
+                                        <h3 class="post-title"><a href="<?php echo $newsUrl ?>"><?php echo get_the_title(); ?></a></h3>
                                     </div>
                                     <div class="featured-right-content">
                                         <div class="featured-details">
