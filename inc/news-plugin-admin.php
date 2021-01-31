@@ -84,6 +84,9 @@ class newsPluginAdmin
             <p><?php _e( '<b>News plugin</b> create page "News plugin page" when it\'s activated. This page use clear plugin template and already loaded shortcode.', NPTEXTDOMAIN );?></p>
             <p><?php _e( 'You can access this page <a href="/news-plugin-page" target="_blank">here</a>.', NPTEXTDOMAIN );?></p>
 
+            <h3><?php _e( 'Uninstall plugin', NPTEXTDOMAIN );?></h3>
+            <p><?php _e( 'When you uninstall <b>News plugin</b> all posts in Custom post type News will be erase permanently. The plugin page will be erase too.', NPTEXTDOMAIN );?></p>
+
             <p><?php _e( 'Enjoy!', NPTEXTDOMAIN );?></p>
         </div>
         <?php
