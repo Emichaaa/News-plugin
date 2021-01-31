@@ -7,7 +7,7 @@
  */
 
 // Custom WP query query
-$args_query = array(
+$main_args_query = array(
     'post_type' => array('news'),
     'post_status' => array('publish'),
     'posts_per_page' => -1,
@@ -30,32 +30,46 @@ if( $category != "all" ){
         'operator' => 'IN',
         'terms' => array($category),
     );
-    $args_query['tax_query'] = array( $taxonomyArgs );
+    $main_args_query['tax_query'] = array( $taxonomyArgs );
     $sectionTitle = $category;
 }
 
-$mainQuery = new WP_Query( $args_query );
-
 $featuredNewsExist = false;
 if( $featured_news ){
-    if( $featured_news == "newest" ){
+    $featured_args_query = $main_args_query;
+    $featured_args_queryBK = $main_args_query;
+    if ( $featured_news == "featured" ){
         $metaArgs = array(
             'key'     => 'np_news_featured',
             'value'   => 'checked',
             'compare' => '='
         );
 
-        $args_query['meta_query'] = array( $metaArgs );
+        $featured_args_query['meta_query'] = array( $metaArgs );
+    }
+    elseif ( $featured_news == "newest" ){
+
     }
     else {
-       $args_query['p'] = $featured_news;
+        $featured_args_query['p'] = $featured_news;
     }
-    $args_query['posts_per_page'] = 1;
-    $featuredQuery = new WP_Query( $args_query );
+    $featured_args_query['posts_per_page'] = 1;
+    $featuredQuery = new WP_Query( $featured_args_query );
+    if( $featured_news == "featured" && !$featuredQuery->posts){
+        $featured_args_queryBK['posts_per_page'] = 1;
+        $featuredQuery = new WP_Query( $featured_args_queryBK );
+    }
     $featuredNewsExist = true;
 }
 
-if($category)
+wp_reset_postdata();
+
+if( $featuredNewsExist ){
+    $main_args_query['post__not_in'] = array($featuredQuery->posts[0]->ID);
+}
+
+$mainQuery = new WP_Query( $main_args_query );
+
 if ( $mainQuery->have_posts() ) {
     ?>
     <div class="wrapper">
@@ -94,7 +108,7 @@ if ( $mainQuery->have_posts() ) {
                     <?php } ?>
                     <p class="tag-post"><?php echo $cats; ?></p>
                     <h3 class="post-title"><a href="<?php echo $newsUrl ?>"><?php echo get_the_title(); ?></a></h3>
-                    <span class="post-data"><?php $post_date ?></span>
+                    <span class="post-data"><?php echo $post_date ?></span>
                 </article>
 
         <?php
