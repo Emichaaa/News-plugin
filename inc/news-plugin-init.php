@@ -18,15 +18,9 @@ class NewsPluginInit
 
     function np_register() {
         add_action( 'wp_enqueue_scripts', array( $this, 'np_register_assets' ) );
-        add_action( 'admin_enqueue_scripts', array( $this, 'np_admin_enqueue' ) );
         add_action( 'wp_footer', array( $this, 'np_enqueue_script_single' ) );
         add_filter( "plugin_action_links_$this->plugin", array( $this, 'np_settings_link' ) );
         add_action( 'init', array( $this, 'np_init_flush' ) );
-    }
-
-    function np_admin_enqueue() {
-        wp_enqueue_style( 'mypluginstyle', plugins_url( '/assets/news-plugin.css', __FILE__ ) );
-        wp_enqueue_script( 'mypluginscript', plugins_url( '/assets/news-script.js', __FILE__ ) );
     }
 
     function np_register_assets() {
