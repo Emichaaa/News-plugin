@@ -1,14 +1,17 @@
 <?php
 
+/**
+ * @package  NewsPlugin
+ */
+
 /*
+ * You can customize this template. Just copy this file and paste it to your-theme/templates/zig-zag-tpl.php
+ *
 Template Name: Zig Zag News Layout
 */
 
-get_header(); ?>
+get_header();
 
-    <h1>Custom Zig Zag Template</h1>
+the_content();
 
-    <p>This is loading properly!</p>
-
-<?php
 get_footer();

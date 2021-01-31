@@ -1,0 +1,17 @@
+/* Single news */
+
+.single-news {
+    padding: 10% 25% 10% 20%;
+}
+
+.single-news img {
+    margin-bottom: 20px;
+}
+
+/* Responsive */
+
+@media only screen and (max-width: 768px) {
+    .single-news {
+        padding: 5%;
+    }
+}

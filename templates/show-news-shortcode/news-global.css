@@ -1,0 +1,41 @@
+/* Global css */
+
+.wrapper {
+    max-width: 1320px;
+    width: 95%;
+    position: relative;
+    margin: 0px auto;
+}
+
+img {
+    width: 100%;
+    object-fit: cover;
+}
+
+.tag-post {
+    font-size: 12px;
+    margin-bottom: 5px;
+}
+
+.black-line {
+    height: 8px;
+    width: 100%;
+    background: black;
+    display: block;
+    margin-bottom: 20px;
+}
+
+.section-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+
+.post-data {
+    color: #a2a0a0;
+    font-weight: 100;
+    font-size: 12px;
+}
+
+/* Responsive */

@@ -1,11 +1,16 @@
 <?php
 
+/**
+ * @package  NewsPlugin
+ */
 
 class NewsPluginCustomPostType
 {
     public function __construct() {
         add_action( 'init', array( $this, 'np_custom_post_type' ) );
         add_action( 'init', array( $this, 'np_register_category_taxonomy' ) );
+        add_action( 'add_meta_boxes', array( $this, 'np_add_news_posts_metaboxes' ) );
+        add_action( 'save_post', array( $this, 'np_news_features_save_meta' ), 10, 2 );
     }
 
     function np_custom_post_type() {
@@ -25,7 +30,8 @@ class NewsPluginCustomPostType
                 'has_archive'        => true,
                 'hierarchical'       => false,
                 'menu_position'      => null,
-                'supports'           => array( 'title', 'editor', 'author', 'thumbnail', 'excerpt', 'comments', 'revisions' )
+                'supports'           => array( 'title', 'editor', 'author', 'thumbnail', 'excerpt', 'comments', 'revisions', 'custom-fields' ),
+                'show_in_rest'       => true,
             )
         );
     }
@@ -62,5 +68,39 @@ class NewsPluginCustomPostType
         );
         register_taxonomy( 'np_category', array('news'), $args );
 
+    }
+
+    function np_add_news_posts_metaboxes() {
+        add_meta_box(
+            'np_news_featured',
+            'Select if this is a fuatured news',
+            array( $this, 'np_news_featured_function' ),
+            'news',
+            'side',
+            'default'
+        );
+    }
+
+    function np_news_featured_function() {
+        global $post;
+
+        $featured_news = get_post_meta( $post->ID, 'np_news_featured', true );
+        echo '<p><input type="checkbox" name="np_news_featured" value="checked" '.get_post_meta($post->ID, 'np_news_featured', true).'/><label for="np_news_featured">'.__('Featured News?', NPTEXTDOMAIN).'</label></p>';
+    }
+
+    function np_news_features_save_meta( $post_id, $post ) {
+        if ( 'news' == $post->post_type ){
+
+            if ( ! current_user_can( 'edit_post', $post_id ) ) {
+                return $post_id;
+            }
+
+            if ( isset( $_POST[ 'np_news_featured' ] ) ) {
+                update_post_meta( $post_id, 'np_news_featured', $_POST[ 'np_news_featured' ] );
+            } else {
+                delete_post_meta( $post_id, 'np_news_featured' );
+            }
+
+        }
     }
 }

@@ -11,8 +11,12 @@ if ( ! defined( 'WP_UNINSTALL_PLUGIN' ) ) {
 }
 
 // Clear Database stored data
-$books = get_posts( array( 'post_type' => 'news', 'numberposts' => -1 ) );
+$news = get_posts( array( 'post_type' => 'news', 'numberposts' => -1 ) );
 
-foreach( $books as $book ) {
-    wp_delete_post( $book->ID, true );
+$plugin_page = get_page_by_title( 'News plugin page' );
+$news = array_merge( $news, $plugin_page );
+
+foreach( $news as $singleNews ) {
+    wp_delete_post( $singleNews->ID, true );
 }
+

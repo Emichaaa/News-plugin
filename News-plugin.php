@@ -23,12 +23,10 @@ define( 'PLUGIN', plugin_basename( __FILE__ ) );
 define( 'NPTEXTDOMAIN', 'egt-news-plugin' );
 define( 'SETTINGS_PAGE_SLUG', 'news_plugin' );
 
-
 if ( !class_exists( 'NewsPlugin' ) ) {
 
     class NewsPlugin
     {
-
         public $plugin;
         public $pluginSvgIcon;
 
@@ -51,7 +49,6 @@ if ( !class_exists( 'NewsPlugin' ) ) {
         function np_init(){
             require_once PLUGIN_PATH . 'inc/news-plugin-init.php';
             $NewsPluginInit = new NewsPluginInit();
-
         }
     }
 
